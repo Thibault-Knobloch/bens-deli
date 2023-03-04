@@ -20,7 +20,9 @@ jobs:
       run: sudo apt-get install python3-pip
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        source /environments/benv/bin/activate
+        pip install -r requirements.txt
 
     - name: Deploy to Hetzner Cloud
       uses: appleboy/scp-action@master
@@ -33,5 +35,8 @@ jobs:
         port: 22
 
     - name: Start the app
-      run: ssh root@${{ secrets.SERVER_IP }} && cd bensdeli/bensdeli && python3 manage.py runserver 0.0.0.0:8000
+      run: |
+        ssh root@${{ secrets.SERVER_IP }} 
+        source /environments/benv/bin/activate
+        cd bensdeli/bensdeli && python3 manage.py runserver 0.0.0.0:8000
       
