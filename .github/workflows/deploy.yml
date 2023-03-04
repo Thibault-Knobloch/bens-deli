@@ -1,0 +1,27 @@
+name: Deploy to Hetzner Cloud
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Deploy to Hetzner Cloud
+        uses: peter-evans/hetzner-cloud-deploy@v2.2.0
+        with:
+          server-id: 29587089
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          hetzner-cloud-token: ${{ secrets.HETZNER_CLOUD_TOKEN }}
+          remote-user: root
+          remote-port: 22
+          remote-path: /var/www/bensdeli
