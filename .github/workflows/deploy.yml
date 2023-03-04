@@ -32,6 +32,6 @@ jobs:
         target: /root/bensdeli/
         port: 22
 
-    # - name: Restart the server
-    #   run: ssh root@${{ secrets.SERVER_IP }} && cd bensdeli/bensdeli && python3 # 'systemctl restart bensdeli'
+    - name: Start the app
+      run: ssh root@${{ secrets.SERVER_IP }} && cd bensdeli/bensdeli && python3 manage.py runserver 0.0.0.0:8000
       
