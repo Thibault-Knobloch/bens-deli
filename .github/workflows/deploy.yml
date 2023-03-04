@@ -31,13 +31,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        ssh root@${{ secrets.SERVER_IP }} 
-        source ~/environments/benv/bin/activate
-        cd bensdeli && pip install -r requirements.txt
-        
+        ssh root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli && pip install -r requirements.txt"
+
     - name: Start the app
       run: |
-        ssh root@${{ secrets.SERVER_IP }} 
-        source ~/environments/benv/bin/activate
-        cd bensdeli/bensdeli && python3 manage.py runserver 0.0.0.0:8000
+        ssh root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli/bensdeli && python3 manage.py runserver 0.0.0.0:8000"
       
