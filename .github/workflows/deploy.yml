@@ -29,15 +29,18 @@ jobs:
         target: /root/bensdeli/
         port: 22
     
+    - name: Add host key to known_hosts
+      run: ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+    
     - name: Install dependencies
       run: |
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+        echo -n "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
         chmod 600 ssh_key
-        ssh -i ssh_key root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli && pip install -r requirements.txt"
+        ssh -i $PWD/ssh_key root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli && pip install -r requirements.txt"
 
     - name: Start the app
       run: |
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+        echo -n "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
         chmod 600 ssh_key
-        ssh -i ssh_key root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli/bensdeli && python3 manage.py runserver 0.0.0.0:8000"
+        ssh -i $PWD/ssh_key root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli/bensdeli && python3 manage.py runserver 0.0.0.0:8000"
       
