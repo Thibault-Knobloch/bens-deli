@@ -41,9 +41,9 @@ jobs:
         chmod 600 ssh_key
         ssh -i ssh_key root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli && pip install -r requirements.txt"
 
-    - name: Start the app
-      run: |
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
-        chmod 600 ssh_key
-        ssh -i ssh_key root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli/bensdeli && python3 manage.py runserver 0.0.0.0:8000"
+    # - name: Start the app
+    #   run: |
+    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+    #     chmod 600 ssh_key
+    #     ssh -i ssh_key root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli/bensdeli && python3 manage.py runserver 0.0.0.0:8000"
       
