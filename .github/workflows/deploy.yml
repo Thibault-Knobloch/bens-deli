@@ -30,7 +30,6 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: ./
         target: /root/bensdeli/
-        args: -r
         port: 22
 
     - name: Restart the server
