@@ -1,4 +1,4 @@
-name: Deploy to Hetzner Cloud
+name: Deploy
 on:
   workflow_dispatch:
     inputs:
@@ -28,6 +28,9 @@ jobs:
         source: ./
         target: /root/bensdeli/
         port: 22
+        exclude: |
+          **/tests/**
+          **/bensdeli/*/tests/**
     
     - name: Add host key to known_hosts
       run: |
