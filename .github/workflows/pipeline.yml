@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  run-tests:
     runs-on: ubuntu-latest
     env:
       DJANGO_SETTINGS_MODULE: "bensdeli.settings"
@@ -29,4 +29,5 @@ jobs:
 
     - name: Run tests
       run: |
+        cd bensdeli
         pytest
