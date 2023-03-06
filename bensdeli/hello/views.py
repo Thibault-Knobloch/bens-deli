@@ -5,7 +5,7 @@ from .forms import PersonForm
 
 
 def hello_world(request):
-    return HttpResponse("Hello world, this is Ben's Deli !")
+    return HttpResponse("Hello world, this is Ben's Deli!")
 
 
 def person_list(request):
