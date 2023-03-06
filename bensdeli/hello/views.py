@@ -1,11 +1,10 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Person
 from .forms import PersonForm
 
 
 def hello_world(request):
-    return HttpResponse("Hello world, this is Ben's Deli!")
+    return render(request, 'hello/hello.html')
 
 
 def person_list(request):
