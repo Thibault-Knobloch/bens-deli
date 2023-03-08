@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav>
+    <a href="/internal">Menu</a>
+    <br>
+    <a href="/internal/create">Create</a>
+    <br>
+    <a href="/internal/edit">Edit</a>
+</nav>
+<h1>Create Product</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+</form>
+{% endblock %}

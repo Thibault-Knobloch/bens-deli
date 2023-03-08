@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Ben you have to login</h1>
+<br>
+<div>
+    <form class="form-inline" method="post">
+        {% csrf_token %}
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Log In</button>
+    </form>
+    <div>
+        <p>{{error}}</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to Ben's Deli!</h1>
+<br>
+<div>
+    <h2>Our products:</h1>
+        {% for product in products %}
+        <h4>{{ product.name }}</h4>
+        {% empty %}
+        <h5>No products to show.</h5>
+        {% endfor %}
+</div>
+{% endblock %}
