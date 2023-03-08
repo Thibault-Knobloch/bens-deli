@@ -7,7 +7,8 @@ from .models import Product
 # Create your views here.
 def index_view(request):
     request.session.clear()
-    return render(request, "products/index.html")
+    products = Product.objects.all()
+    return render(request, "products/index.html", {"products": products})
 
 
 def internal_view(request):

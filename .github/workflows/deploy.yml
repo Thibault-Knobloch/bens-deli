@@ -42,7 +42,7 @@ jobs:
       run: |
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
         chmod 600 ssh_key
-        ssh -i ssh_key root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli && pip install -r requirements.txt"
+        ssh -i ssh_key root@${{ secrets.SERVER_IP }} "source ~/environments/benv/bin/activate && cd bensdeli && pip install -r requirements.txt && cd bensdeli && python3 manage.py makemigrations && python3 manage.py migrate"
 
     # - name: Start the app
     #   run: |

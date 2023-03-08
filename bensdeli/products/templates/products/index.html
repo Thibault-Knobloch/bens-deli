@@ -7,6 +7,7 @@
     <h2>Our products:</h1>
         {% for product in products %}
         <h4>{{ product.name }}</h4>
+        <img src="{{product.image.url}}" width="100px" height="100px" />
         {% empty %}
         <h5>No products to show.</h5>
         {% endfor %}

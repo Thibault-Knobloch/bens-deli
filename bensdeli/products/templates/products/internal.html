@@ -14,7 +14,7 @@
         {% for product in products %}
         <li>
             <h4>{{ product.name }}</h4>
-            <img src="{{product.image}}" width="100px" height="100px" />
+            <img src="{{product.image.url}}" width="100px" height="100px" />
         </li>
         {% empty %}
         <li>No products yet</li>
