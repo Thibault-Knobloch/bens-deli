@@ -4,6 +4,10 @@
     font-family: 'FreestyleScript', sans-serif;
 }
 
+body {
+    overflow-y: hidden;
+}
+
 @font-face {
     font-family: 'FreestyleScript';
     src: url('../fonts/freestyleScript.TTF') format('truetype');
