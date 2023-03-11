@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit
 import os
 from .forms import ProductForm
 from .models import Product
@@ -20,8 +18,14 @@ def internal_view(request):
         return redirect("login_view")
 
     if request.session["loggedIn"] == "True":
-        products = Product.objects.all()
-        return render(request, "products/internal.html", {"products": products})
+        if request.method == "GET":
+            products = Product.objects.all()
+            return render(request, "products/internal.html", {"products": products})
+        if request.method == "POST":
+            product_id = request.POST.get("product_id")
+            instance = Product.objects.get(id=product_id)
+            instance.delete()
+            return redirect("internal_view")
     else:
         return redirect("index_view")
 

@@ -15,6 +15,12 @@
             <h4><a href="/internal/edit/{{product.id}}">
                     {{ product.name }}
                 </a></h4>
+            <form method="POST">
+                {% csrf_token %}
+                <input hidden name="product_id" value="{{product.id}}" />
+                <button type="submit">DELETE</button>
+            </form>
+
             <img src="{{product.image.url}}" width="100px" height="100px" />
         </li>
         {% empty %}
