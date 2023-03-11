@@ -1,31 +1,45 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<nav>
-    <a href="/internal">Menu</a>
-    <br>
-    <a href="/internal/create">Create</a>
-    <br>
-</nav>
-<div>
-    <h2>This is only visible to you Ben</h2>
-    <ul>
-        {% for product in products %}
-        <li>
-            <h4><a href="/internal/edit/{{product.id}}">
-                    {{ product.name }}
-                </a></h4>
-            <form method="POST">
-                {% csrf_token %}
-                <input hidden name="product_id" value="{{product.id}}" />
-                <button type="submit">DELETE</button>
-            </form>
 
-            <img src="{{product.image.url}}" width="100px" height="100px" />
-        </li>
-        {% empty %}
-        <li>No products yet</li>
-        {% endfor %}
-    </ul>
+{% block content %}
+<div>
+    <nav>
+        <a href="/internal">Menu</a>
+        <br>
+        <a href="/internal/create">Create</a>
+        <br>
+    </nav>
+    <div>
+        <h2>This is only visible to you Ben</h2>
+        <ul>
+            {% for product in products %}
+            <li>
+                <h4><a href="/internal/edit/{{product.id}}">
+                        {{ product.name }}
+                    </a></h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input hidden name="product_id" value="{{product.id}}" />
+                    <button type="submit">DELETE</button>
+                </form>
+
+                <img src="{{product.image.url}}" width="100px" height="100px" />
+            </li>
+            {% empty %}
+            <li>No products yet</li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }
+
+    body {
+        background: white !important;
+    }
+</style>
 {% endblock %}

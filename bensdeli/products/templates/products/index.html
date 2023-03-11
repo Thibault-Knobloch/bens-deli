@@ -1,15 +1,42 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<h1>Welcome to Ben's Deli!</h1>
-<br>
-<div>
-    <h2>Our products:</h1>
-        {% for product in products %}
-        <h4>{{ product.name }}</h4>
-        <img src="{{product.image.url}}" width="100px" height="100px" />
-        {% empty %}
-        <h5>No products to show.</h5>
-        {% endfor %}
-</div>
+<section>
+    <div class="homepage_title_text">
+        <span>HOMEMADE SOUTH EAST ASIAN CHILLI SAUCES</span>
+    </div>
+    <div class="homepage_logo_div">
+        <img class="homepage_logo" src="{% static 'images/bens_deli_logo.png' %}" alt="My Image">
+    </div>
+    <div style="width: 90%; border: 2px solid black; margin: 30px auto;"></div>
+    <div class="quote_text">
+        <p>Elevate your taste buds with bold, aromatic flavors. Let's bring up that spice in your life!</p>
+        <div class="quote_author">- Ben 2023</div>
+    </div>
+    <div style="width: 90%; border: 2px solid black; margin: 30px auto;"></div>
+</section>
+
+<section>
+    <div class="products_title_text">
+        <span>Try our high quality products!</span>
+    </div>
+    <div>
+        <div class="row">
+            {% for product in products %}
+            <div class="col">
+                <div class="product_card mx-auto mb-3">
+                    <img src="{{product.image.url}}" width="250px" height="250px" />
+                    <div style="margin: auto; max-width: 300px; width: fit-content; ">
+                        <h2>{{ product.name }}</h4>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div style="margin-top: 70px;"></div>
+</section>
+
 {% endblock %}
