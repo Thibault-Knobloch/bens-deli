@@ -6,14 +6,15 @@
     <br>
     <a href="/internal/create">Create</a>
     <br>
-    <a href="/internal/edit">Edit</a>
 </nav>
 <div>
     <h2>This is only visible to you Ben</h2>
     <ul>
         {% for product in products %}
         <li>
-            <h4>{{ product.name }}</h4>
+            <h4><a href="/internal/edit/{{product.id}}">
+                    {{ product.name }}
+                </a></h4>
             <img src="{{product.image.url}}" width="100px" height="100px" />
         </li>
         {% empty %}

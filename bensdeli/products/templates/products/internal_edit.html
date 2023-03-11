@@ -7,10 +7,10 @@
     <a href="/internal/create">Create</a>
     <br>
 </nav>
-<h1>Create Product</h1>
+<h1>Edit Product</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create</button>
+    {{ form }}
+    <button type="submit">Edit</button>
 </form>
 {% endblock %}
