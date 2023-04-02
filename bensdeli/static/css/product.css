@@ -18,6 +18,7 @@
     margin: auto;
     width: fit-content;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .product_image_div {
@@ -81,6 +82,12 @@
         font-size: xx-large;
     }
 }
+@media all and (min-width: 900px) {
+    .product_desc_div {
+        font-size: x-large;
+    }
+}
+
 
 @media all and (min-width: 1200px) {
     .product_title_div {
