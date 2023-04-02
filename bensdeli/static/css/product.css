@@ -18,7 +18,6 @@
     margin: auto;
     width: fit-content;
     margin-bottom: 10px;
-    font-weight: bold;
 }
 
 .product_image_div {
@@ -54,7 +53,6 @@
     padding-right: 10px;
     text-align: center;
     font-size: xx-large;
-    font-weight: bold;
 }
 
 .price_computer {
