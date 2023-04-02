@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section>
+    <div class="product_details_div">
+        <div class="product_title_div">
+            <span>{{product.name}}</span>
+        </div>
+        <div class="computer_layout centered">
+            <div class="left_product">
+                <div class="product_image_div black_border orange_bg centered">
+                    <img src="{{product.image.url}}" class="product_image" />
+                </div>
+                <div class="product_info_div centered">
+                    <div class="spice_div">
+                        {% for _ in "x"|ljust:product.spice_level %}
+                            <img src="{% static 'images/chilli.png' %}" class="chilli_icon"/>
+                        {% endfor %}
+                        {% for x in faded_chilli %}
+                            <img src="{% static 'images/chilli.png' %}" class="chilli_icon faded"/>
+                        {% endfor %}
+                    </div>
+                    <div class="price_div black_border orange_bg centered price_phone"><span class="currency">€</span>{{ product.price|floatformat:2 }}</div>
+                </div>
+            </div>
+            <div class="right_product centered">
+                <div class="right_product_inner">
+                    <div class="product_desc_div centered">
+                        <p>{{product.desc}}</p>
+                    </div>
+                    <div class="price_computer centered">
+                        <div class="price_div black_border orange_bg centered"><span class="currency">€</span>{{ product.price|floatformat:2 }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="width: 90%; border: 2px solid black; margin: 30px auto;"></div>
+    </div>
+</section>
+
+{% endblock %}

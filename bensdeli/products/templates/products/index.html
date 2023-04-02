@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+<div class="page_container">
 <section>
     <div class="homepage_title_text">
         <span>HOMEMADE SOUTH EAST ASIAN CHILLI SAUCES</span>
@@ -25,8 +26,8 @@
         <div class="row">
             {% for product in products %}
             <div class="col">
-                <div class="product_card mx-auto mb-3">
-                    <img src="{{product.image.url}}" width="250px" height="250px" />
+                <div class="product_card mx-auto mb-3" onclick="location.href='product/{{product.id}}'">
+                    <img src=" {{product.image.url}}" width="250px" height="250px" />
                     <div style="margin: auto; max-width: 300px; width: fit-content; ">
                         <h2>{{ product.name }}</h4>
                     </div>
@@ -38,5 +39,6 @@
     </div>
     <div style="margin-top: 70px;"></div>
 </section>
+</div>
 
 {% endblock %}

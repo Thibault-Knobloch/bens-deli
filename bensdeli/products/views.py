@@ -10,6 +10,11 @@ def index_view(request):
     return render(request, "products/index.html", {"products": products})
 
 
+def product_view(request, pk):
+    product = Product.objects.get(id=pk)
+    return render(request, "products/product.html", {"product": product, "faded_chilli":range(5-product.spice_level)})
+
+
 def internal_view(request):
     # check if user is logged in in session
     try:

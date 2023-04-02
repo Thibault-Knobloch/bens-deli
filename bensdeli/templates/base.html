@@ -16,6 +16,7 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/product.css' %}">
 
   <title>{% block title %}Ben's Deli{% endblock %}</title>
 </head>
@@ -41,14 +42,7 @@
 
   <!-- Optional JavaScript -->
   <script>
-    const url = "?cf_er=_cf_process_5e7a1d0c43fbe";
-
-    var path = window.location.pathname
-    if (path.includes("products")) {
-      document.getElementById("products").classList.add("active")
-    } else {
-      document.getElementById("products").classList.remove("active")
-    }
+    
   </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
