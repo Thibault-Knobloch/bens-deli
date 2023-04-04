@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import os
-from .forms import ProductForm
-from .models import Product
+from .forms import ProductForm, ReviewForm
+from .models import Product, Review
 
 
 # Create your views here.
@@ -11,8 +11,44 @@ def index_view(request):
 
 
 def product_view(request, pk):
-    product = Product.objects.get(id=pk)
-    return render(request, "products/product.html", {"product": product, "faded_chilli":range(5-product.spice_level)})
+    product = get_object_or_404(Product, id=pk)
+    form = ReviewForm()
+    reviews = product.reviews.all()
+    average_rating = calculate_average_rating(reviews)
+    return render(request, "products/product.html",
+        {
+            "product": product,
+            "form": form,
+            "reviews": reviews,
+            "average_rating": average_rating
+        })
+
+
+def calculate_average_rating(reviews):
+    if len(reviews) == 0:
+        return "no rating"
+    
+    sum_rating = 0
+    nbr_reviews = 0
+    for review in reviews:
+        sum_rating += review.rating
+        nbr_reviews += 1
+    
+    return sum_rating / nbr_reviews
+
+def submit_review(request):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        product_id = request.POST.get('product_id')
+        if form.is_valid():
+            product_id = request.POST.get('product_id')
+            review = form.save(commit=False)
+            review.product_id = product_id
+            review.save()
+            return redirect('product_view', pk=product_id)
+        return redirect('product_view', pk=product_id)
+    
+    return redirect("index_view")
 
 
 def internal_view(request):

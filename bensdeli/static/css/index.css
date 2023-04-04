@@ -69,14 +69,6 @@
     margin-bottom: 50px;
 }
 
-.grid_container {
-    display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-gap: 10px;
-    background-color: #fff;
-    color: #444;
-}
-
 .product_card {
     border: black 4px solid;
     background: #F2891C;
@@ -85,9 +77,13 @@
     border-radius: 10px;
     padding: 5px 20px 5px 20px;
     z-index: 1;
+    position: relative;
+    top: 0;
+    transition: 0.5s;
 }
 
 .product_card:hover {
+    top: -5px;
     cursor: pointer;
     box-shadow: 10px 10px 40px #000000;
     z-index: 5;

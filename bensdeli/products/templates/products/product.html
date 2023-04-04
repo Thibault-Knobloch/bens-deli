@@ -15,11 +15,12 @@
                 </div>
                 <div class="product_info_div centered">
                     <div class="spice_div">
-                        {% for _ in "x"|ljust:product.spice_level %}
+                        {% for i in "12345" %}
+                            {% if i|add:"-1" < product.spice_level %}
                             <img src="{% static 'images/chilli.png' %}" class="chilli_icon"/>
-                        {% endfor %}
-                        {% for x in faded_chilli %}
+                            {% else %}
                             <img src="{% static 'images/chilli.png' %}" class="chilli_icon faded"/>
+                            {% endif %}
                         {% endfor %}
                     </div>
                     <div class="price_div black_border orange_bg centered price_phone"><span class="currency">€</span>{{ product.price|floatformat:2 }}</div>
@@ -36,9 +37,109 @@
                 </div>
             </div>
         </div>
-        
-        <div style="width: 90%; border: 2px solid black; margin: 30px auto;"></div>
     </div>
 </section>
+
+<div style="width: 90%; border: 2px solid black; margin: 50px auto 10px auto;"></div>
+
+<section>
+    <div class="review_section">
+        <div class="review_header centered"><span>See what our customers have to say</span></div>
+        <div class="review_header centered">
+            {% if average_rating == "no rating" %}
+                <span style="font-size: large;">No ratings yet. Be the first!</span>
+            {% else %}
+                Rating: <b><span style="font-size: xx-large;">{{ average_rating|floatformat:1 }}</span></b><span style="font-size: xx-large; margin-left: 5px;">&#9733;</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="reviews_container">
+        {% for review in reviews %}
+            <div class="review_div orange_bg black_border">
+                <div class="review_top">
+                    <div class="review_name">{{review.name}}</div>
+                    <div class="review_rating">
+                        <div class="stars_div">
+                            {% for i in "12345" %}
+                                {% if i|add:"-1" < review.rating %}
+                                    <span>&#9733;</span>
+                                {% else %}
+                                    <span>&#9734;</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="review_bottom">
+                    <div class="review_content">{{review.content}}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="add_review_div centered">
+        <div class="add_review_text centered">Add review</div>
+        <div class="plus_icon orange_bg black_border centered" onclick="openReviewModal();">+</div>
+    </div>
+</section>
+
+<div id="myModal" class="modal black_border">
+    <div class="modal-content orange_bg black_border">
+        <div>
+            <div class="modal_close_div"><span class="close">&times;</span></div>
+            <div class="modal_title centered">Thank you for the review!</div>
+            <div class="modal_form_div">
+                <form method="post" action="{% url 'submit_review' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <div class="upper_form_div centered">
+                        <div class="form-field" style="flex: 1;">
+                            <label for="{{ form.name.id_for_label }}">Name:</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="form-field" style="flex: 1;">
+                            <label for="{{ form.rating.id_for_label }}">Rating:</label>
+                            {{ form.rating }}<span style="font-size: x-large;"> /5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="{{ form.content.id_for_label }}">Content:</label>
+                        {{ form.content }}
+                    </div>
+                    <div class="post_review_button centered">
+                        <button class="modal_button bg_cream" type="submit">Post Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    function openReviewModal() {
+        modal.classList.add("show");        
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.classList.remove("show");
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.classList.remove("show");
+        }
+    }
+
+    
+</script>
 
 {% endblock %}

@@ -1,0 +1,107 @@
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    padding: 20px;
+    max-height: 300px;
+}
+
+.modal_form_div {
+    margin-top: 30px;
+}
+
+.modal_title {
+    width: fit-content;
+    font-size: xx-large;
+}
+
+.modal_close_div {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.close {
+    margin-right: 5px;
+    margin-top: -10px;
+    color: rgb(68, 68, 68);
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.close:hover,
+.close:focus {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.upper_form_div {
+    align-items: center;
+    width: 90%;
+    display: flex;
+}
+
+.form-field {
+    text-align: center;
+}
+
+input[type=text], textarea {
+    border: 3px black solid;
+    border-radius: 10px;
+}
+
+form .form-field textarea {
+    height: 3em;
+    width: 100%;
+    padding: 5px;
+}
+form label {
+    font-size: x-large;
+}
+#id_name {
+    border: 3px solid black;
+    border-radius: 5px;
+}
+#id_rating {
+    border: 3px solid black;
+    border-radius: 5px;
+}
+#id_content {
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.modal_button {
+    border: 3px solid black;
+    font-size: x-large;
+    border-radius: 10px;
+    width: fit-content;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.post_review_button {
+width: fit-content;
+}
+.modal_button:hover {
+    box-shadow: 5px 5px 20px #000000;
+    z-index: 5;
+}
