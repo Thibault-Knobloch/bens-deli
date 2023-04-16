@@ -1,5 +1,6 @@
 from django import forms
 from .models import Product, Review
+from django.contrib.auth.models import User
 
 
 class ProductForm(forms.ModelForm):
@@ -9,6 +10,12 @@ class ProductForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput())
+
     class Meta:
         model = Review
-        fields = ['name', 'rating', 'content']
+        fields = ['user', 'rating', 'content']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['user'].initial = kwargs['initial'].get('user')

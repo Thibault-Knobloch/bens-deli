@@ -86,6 +86,14 @@ form label {
     padding-right: 5px;
     padding-left: 5px;
 }
+.delete_button{
+    border: 3px solid black;
+    font-size: small;
+    border-radius: 10px;
+    width: fit-content;
+    padding-right: 5px;
+    padding-left: 5px;
+}
 .post_review_button {
 width: fit-content;
 }

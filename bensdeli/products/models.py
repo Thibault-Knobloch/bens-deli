@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -29,10 +30,10 @@ class Review(models.Model):
     )
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    name = models.CharField(max_length=140)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     rating = models.PositiveSmallIntegerField(choices=RATINGS_CHOICES)
     content = models.TextField(max_length=500)
 
     def __str__(self):
         str_rating = str(self.rating)
-        return self.name + " rating: " + str_rating
+        return f"{self.product.name} review by {self.user.username}: {self.rating}"

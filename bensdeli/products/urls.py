@@ -9,4 +9,5 @@ urlpatterns = [
     path("internal/create", views.internal_create, name="internal_create"),
     path("internal/edit/<int:pk>", views.internal_edit, name="internal_edit"),
     path('submit-review/', views.submit_review, name='submit_review'),
+    path('delete-review/', views.delete_review, name='delete_review'),
 ]

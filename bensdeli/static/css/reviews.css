@@ -61,7 +61,6 @@
 .review_name {
     overflow: hidden;
     font-size: x-large;
-    font-weight: bold;
     flex: 1;
     max-height: 50px;
 }
@@ -80,6 +79,15 @@
     height: fit-content;
     font-size: large;
     overflow-y: auto;
+}
+
+.delete_review_div {
+    width: fit-content;
+    float: right;
+}
+.delete_review_div:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 @media all and (min-width: 950px) {

@@ -58,7 +58,7 @@
         {% for review in reviews %}
             <div class="review_div orange_bg black_border">
                 <div class="review_top">
-                    <div class="review_name">{{review.name}}</div>
+                    <div class="review_name">{{review.user.username}}</div>
                     <div class="review_rating">
                         <div class="stars_div">
                             {% for i in "12345" %}
@@ -73,6 +73,19 @@
                 </div>
                 <div class="review_bottom">
                     <div class="review_content">{{review.content}}</div>
+                </div>
+                <div class="delete_review_div">
+                    {% if user.is_authenticated %}
+                        {% if review.user == user %}
+                                <form method="POST" action="{% url 'delete_review' %}">
+                                    {% csrf_token %}
+                                    <input hidden name="review_id" value="{{review.id}}">
+                                    <input hidden name="review_user_id" value="{{review.user.id}}">
+                                    <input hidden name="product_id" value="{{product.id}}">
+                                    <button type="submit" onclick="return confirm('Are you sure you want to delete your review?')" class="bg_cream delete_button">DELETE REVIEW</button>
+                                </form>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
@@ -91,16 +104,13 @@
     <div class="modal-content orange_bg black_border">
         <div>
             <div class="modal_close_div"><span class="close">&times;</span></div>
-            <div class="modal_title centered">Thank you for the review!</div>
+            <div class="modal_title centered">Thank you for the review, {{user.username}}!</div>
             <div class="modal_form_div">
                 <form method="post" action="{% url 'submit_review' %}">
                     {% csrf_token %}
+                    {{ form.user }}
                     <input type="hidden" name="product_id" value="{{ product.id }}">
                     <div class="upper_form_div centered">
-                        <div class="form-field" style="flex: 1;">
-                            <label for="{{ form.name.id_for_label }}">Name:</label>
-                            {{ form.name }}
-                        </div>
                         <div class="form-field" style="flex: 1;">
                             <label for="{{ form.rating.id_for_label }}">Rating:</label>
                             {{ form.rating }}<span style="font-size: x-large;"> /5</span>

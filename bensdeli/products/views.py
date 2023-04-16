@@ -12,7 +12,7 @@ def index_view(request):
 
 def product_view(request, pk):
     product = get_object_or_404(Product, id=pk)
-    form = ReviewForm()
+    form = ReviewForm(initial={'user': request.user})
     reviews = product.reviews.all()
     average_rating = calculate_average_rating(reviews)
     return render(request, "products/product.html",
@@ -38,17 +38,30 @@ def calculate_average_rating(reviews):
 
 def submit_review(request):
     if request.method == 'POST':
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, initial={'user': request.user})
         product_id = request.POST.get('product_id')
         if form.is_valid():
-            product_id = request.POST.get('product_id')
             review = form.save(commit=False)
             review.product_id = product_id
             review.save()
             return redirect('product_view', pk=product_id)
         return redirect('product_view', pk=product_id)
-    
+
     return redirect("index_view")
+
+
+def delete_review(request):
+    if request.method == "POST":
+        product_id = request.POST.get('product_id')
+        review_id = request.POST.get('review_id')
+        review_user_id = int(request.POST.get('review_user_id'))
+        breakpoint()
+        if review_user_id == request.user.id:
+            review = get_object_or_404(Review, id=review_id)
+            review.delete()
+            return redirect('product_view', pk=product_id)
+        else:
+            return redirect("index_view")
 
 
 def internal_view(request):
