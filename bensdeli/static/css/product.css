@@ -157,3 +157,10 @@
         display: inline;
     }
 }
+
+@media (pointer:none), (pointer:coarse) {
+    /* CSS rules here for if screen is mobile phone */
+    .product_arrows:hover {
+        font-size: 40px; 
+    }
+}
