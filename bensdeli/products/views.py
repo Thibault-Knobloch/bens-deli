@@ -11,16 +11,26 @@ def index_view(request):
 
 
 def product_view(request, pk):
-    product = get_object_or_404(Product, id=pk)
+    try:
+        product = Product.objects.get(id=pk)
+    except:
+        product = Product.objects.first()
     form = ReviewForm(initial={'user': request.user})
     reviews = product.reviews.all()
     average_rating = calculate_average_rating(reviews)
+
+    # Find the prev and next product
+    previous_product = Product.objects.filter(id__lt=product.id).order_by('-id').first()
+    next_product = Product.objects.filter(id__gt=product.id).first()
+
     return render(request, "products/product.html",
         {
             "product": product,
             "form": form,
             "reviews": reviews,
-            "average_rating": average_rating
+            "average_rating": average_rating,
+            "previous_product_id": previous_product.id if previous_product else None,
+            "next_product_id": next_product.id if next_product else None
         })
 
 

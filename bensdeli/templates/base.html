@@ -16,10 +16,10 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
-  <link rel="stylesheet" href="{% static 'css/product.css' %}">
   <link rel="stylesheet" href="{% static 'css/forms.css' %}">
   <link rel="stylesheet" href="{% static 'css/reviews.css' %}">
   <link rel="stylesheet" href="{% static 'css/users.css' %}">
+  <link rel="stylesheet" href="{% static 'css/product.css' %}">
 
   <title>{% block title %}Ben's Deli{% endblock %}</title>
 </head>
@@ -34,6 +34,9 @@
         <ul class="navbar-nav mr-auto" style='order: 2;'>
           <li class="nav-item navigation_text {% if request.path == '/' %}active{% endif %}">
             <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item navigation_text {% if '/product/' in request.path %}active{% endif %}">
+            <a class="nav-link" href="/product/1">Products</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto" style='order: 2;'>

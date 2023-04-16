@@ -5,9 +5,26 @@
 
 <section>
     <div class="product_details_div">
-        <div class="product_title_div">
-            <span>{{product.name}}</span>
+        <div class="top_container">
+            <div class="left_arrow_div centered">
+                {% if previous_product_id %}
+                    <a class="product_arrows" href="/product/{{previous_product_id}}"><</a>
+                {% else %}
+                    <a class="product_arrows_disabled"><</a>
+                {% endif %}
+            </div>
+            <div class="product_title_div">
+                <span>{{product.name}}</span>
+            </div>
+            <div class="right_arrow_div centered">
+                {% if next_product_id %}
+                    <a class="product_arrows" href="/product/{{next_product_id}}">></a>
+                    {% else %}
+                    <a class="product_arrows_disabled">></a>
+                {% endif %}
+            </div>
         </div>
+        
         <div class="computer_layout centered">
             <div class="left_product">
                 <div class="product_image_div black_border orange_bg centered">
@@ -38,6 +55,9 @@
             </div>
         </div>
     </div>
+
+        
+    
 </section>
 
 <div style="width: 90%; border: 2px solid black; margin: 50px auto 10px auto;"></div>

@@ -36,6 +36,7 @@
 .navigation_text {
     font-size: x-large;
     margin: auto;
+    padding-left: 10px;
 }
 
 .main_container {
