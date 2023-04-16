@@ -64,9 +64,9 @@
     text-align: center;
 }
 
-input[type=text], textarea {
-    border: 3px black solid;
-    border-radius: 10px;
+input, select, textarea {
+    border: 3px solid black;
+    border-radius: 7px;
 }
 
 form .form-field textarea {
@@ -76,18 +76,6 @@ form .form-field textarea {
 }
 form label {
     font-size: x-large;
-}
-#id_name {
-    border: 3px solid black;
-    border-radius: 5px;
-}
-#id_rating {
-    border: 3px solid black;
-    border-radius: 5px;
-}
-#id_content {
-    border: 3px solid black;
-    border-radius: 10px;
 }
 
 .modal_button {

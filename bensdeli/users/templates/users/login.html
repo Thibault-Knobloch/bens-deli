@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="register_container">
+    <h2 class="centered" style="width: fit-content;">Welcome back to Ben's Deli!</h2>
+    <div class="register_form_div">
+        <form method="post" class="login_form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            <button class="register_button orange_bg black_border" type="submit">Login</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -78,10 +78,13 @@
         {% endfor %}
     </div>
 
+    {% if user.is_authenticated %}
     <div class="add_review_div centered">
         <div class="add_review_text centered">Add review</div>
         <div class="plus_icon orange_bg black_border centered" onclick="openReviewModal();">+</div>
     </div>
+    {% endif %}
+    <br>
 </section>
 
 <div id="myModal" class="modal black_border">
@@ -138,7 +141,6 @@
             modal.classList.remove("show");
         }
     }
-
     
 </script>
 

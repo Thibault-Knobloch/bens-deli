@@ -17,8 +17,9 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
   <link rel="stylesheet" href="{% static 'css/product.css' %}">
-  <link rel="stylesheet" href="{% static 'css/form_modal.css' %}">
+  <link rel="stylesheet" href="{% static 'css/forms.css' %}">
   <link rel="stylesheet" href="{% static 'css/reviews.css' %}">
+  <link rel="stylesheet" href="{% static 'css/users.css' %}">
 
   <title>{% block title %}Ben's Deli{% endblock %}</title>
 </head>
@@ -26,8 +27,31 @@
 <body class="bg_cream">
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light bg_orange" style="border: 5px solid black;">
-      <img class="navbar_logo" src="{% static 'images/logo_fake.png' %}" alt="My Image">
+      <img class="navbar_logo" src="{% static 'images/logo_fake.png' %}" alt="My Image" onclick="location.assign('/');">
       <a class="navbar-brand custom_navbar" href="/"><span class="logo_text">Ben's Deli</span></a>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto" style='order: 2;'>
+          <li class="nav-item navigation_text {% if request.path == '/' %}active{% endif %}">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" style='order: 2;'>
+          {% if user.is_authenticated %}
+            <li class="nav-item navigation_text">
+              <a class="nav-link" href="{% url 'logout_view' %}?next={{ request.path }}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item navigation_text {% if request.path == '/login/' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'user_login_view' %}?next={{ request.path }}">Log In</a>
+            </li>
+            <li class="nav-item navigation_text {% if request.path == '/register/' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'register_view' %}?next={{ request.path }}">Register</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

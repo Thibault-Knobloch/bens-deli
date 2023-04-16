@@ -1,0 +1,30 @@
+.register_container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.register_form_div {
+    width: fit-content;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.register_form_div form input[type="text"],
+.register_form_div form input[type="email"],
+.register_form_div form input[type="password"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px 10px;
+}
+
+.register_button {
+    margin: auto;
+    margin-top: 20px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: x-large;
+}
