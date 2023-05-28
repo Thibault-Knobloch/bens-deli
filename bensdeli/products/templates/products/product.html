@@ -54,7 +54,7 @@
                         </div>
                         <div class="price_div black_border orange_bg centered">
                             <span class="currency">€</span>
-                            <span id="price_value">{{ biggest_size_option.price }}</span>
+                            <span id="price_value">{{ biggest_size_option.price|floatformat:2 }}</span>
                         </div>
                         {% endif %} 
                     </div>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="price_div black_border orange_bg centered">
                             <span class="currency">€</span>
-                            <span id="price_computer_value">{{ biggest_size_option.price }}</span>
+                            <span id="price_computer_value">{{ biggest_size_option.price|floatformat:2 }}</span>
                         </div>
                         {% endif %}  
                     </div>

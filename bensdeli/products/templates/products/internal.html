@@ -30,7 +30,7 @@
                     <h4>Size options:</h4>
                     <ul>
                         {% for size in product.sizes.all %}
-                            <li>Size: <b>{{size.size}}</b> with price: {{size.price}} 
+                            <li>Size: <b>{{size.size}}</b> with price: {{size.price|floatformat:2 }} 
                                 <form method="POST" action="{% url 'internal_delete_size_option' %}">
                                     {% csrf_token %}
                                     <input hidden name="size_id" value="{{size.id}}" />
