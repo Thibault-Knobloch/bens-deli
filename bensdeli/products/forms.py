@@ -1,12 +1,18 @@
 from django import forms
-from .models import Product, Review
+from .models import Product, Review, SizeOption
 from django.contrib.auth.models import User
 
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ["name", "desc", "image", "price", "spice_level"]
+        fields = ["name", "desc", "image", "spice_level"]
+
+
+class SizeOptionForm(forms.ModelForm):
+    class Meta:
+        model = SizeOption
+        fields = ["product", "size", "price"]
 
 
 class ReviewForm(forms.ModelForm):

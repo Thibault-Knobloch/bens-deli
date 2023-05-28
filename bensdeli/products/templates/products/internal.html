@@ -11,24 +11,50 @@
     </nav>
     <div>
         <h2>This is only visible to you Ben</h2>
+        <br>
+        <h2>PRODUCTS</h2>
         <ul>
             {% for product in products %}
             <li>
-                <h4><a href="/internal/edit/{{product.id}}">
-                        {{ product.name }}
-                    </a></h4>
-                <form method="POST">
-                    {% csrf_token %}
-                    <input hidden name="product_id" value="{{product.id}}" />
-                    <button type="submit" onclick="return confirm('Are you sure?')">DELETE</button>
-                </form>
+                <div>
+                    <h4><a href="/internal/edit/{{product.id}}">
+                            {{ product.name }}
+                        </a></h4>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input hidden name="product_id" value="{{product.id}}" />
+                        <button type="submit" onclick="return confirm('Are you sure?')">DELETE</button>
+                    </form>
 
-                <img src="{{product.image.url}}" width="100px" height="100px" />
+                    <img src="{{product.image.url}}" width="100px" height="100px" />
+                    <h4>Size options:</h4>
+                    <ul>
+                        {% for size in product.sizes.all %}
+                            <li>Size: <b>{{size.size}}</b> with price: {{size.price}} 
+                                <form method="POST" action="{% url 'internal_delete_size_option' %}">
+                                    {% csrf_token %}
+                                    <input hidden name="size_id" value="{{size.id}}" />
+                                    <button type="submit" onclick="return confirm('Are you sure?')">DELETE</button>
+                                </form>
+                            </li>
+                        {% empty %}
+                            <li>No size options created yet. Create some!</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </li>
             {% empty %}
             <li>No products yet</li>
             {% endfor %}
         </ul>
+        <br>
+        <br>
+        <h2>Create Size option</h2>
+        <form action="{% url 'internal_create_size_option' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Option</button>
+        </form>
     </div>
 </div>
 <style>

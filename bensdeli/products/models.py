@@ -15,10 +15,18 @@ class Product(models.Model):
     name = models.TextField()
     desc = models.TextField()
     image = models.ImageField(upload_to="product_images/")
-    price = models.FloatField()
-
     spice_level = models.IntegerField(choices=Spice.choices)
 
+    def __str__(self):
+        return self.name
+
+
+class SizeOption(models.Model):
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='sizes')
+    size = models.PositiveSmallIntegerField()
+    price = models.FloatField()
+    
 
 class Review(models.Model):
     RATINGS_CHOICES = (

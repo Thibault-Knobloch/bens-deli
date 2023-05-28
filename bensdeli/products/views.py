@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 import os
-from .forms import ProductForm, ReviewForm
-from .models import Product, Review
+from .forms import ProductForm, ReviewForm, SizeOptionForm
+from .models import Product, Review, SizeOption
 
 
 # Create your views here.
@@ -23,9 +23,13 @@ def product_view(request, pk):
     previous_product = Product.objects.filter(id__lt=product.id).order_by('-id').first()
     next_product = Product.objects.filter(id__gt=product.id).first()
 
+    # get biggest size option for product
+    biggest_size_option = product.sizes.order_by('-size').first()
+
     return render(request, "products/product.html",
         {
             "product": product,
+            "biggest_size_option": biggest_size_option,
             "form": form,
             "reviews": reviews,
             "average_rating": average_rating,
@@ -84,7 +88,8 @@ def internal_view(request):
     if request.session["loggedIn"] == "True":
         if request.method == "GET":
             products = Product.objects.all()
-            return render(request, "products/internal.html", {"products": products})
+            form = SizeOptionForm()
+            return render(request, "products/internal.html", {"products": products, "form": form})
         if request.method == "POST":
             product_id = request.POST.get("product_id")
             instance = Product.objects.get(id=product_id)
@@ -136,6 +141,21 @@ def internal_edit(request, pk):
     else:
         return redirect("index_view")
 
+
+def internal_create_size_option(request):
+    if request.method == "POST":
+        size_option_form = SizeOptionForm(request.POST)
+        if size_option_form.is_valid():
+            size_option_form.save()
+            return redirect("internal_view")
+
+def internal_delete_size_option(request):
+    if request.method == "POST":
+        size_id = request.POST.get("size_id")
+        size_option = get_object_or_404(SizeOption, id=size_id)
+        product = size_option.product
+        size_option.delete()
+        return redirect("internal_view")
 
 def login_view(request):
     if request.method == "GET":

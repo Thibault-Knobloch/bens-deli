@@ -84,12 +84,17 @@
     opacity: 0.3;
 }
 
+
 .price_div {
+    flex: 1;
     width: fit-content;
     padding-left: 10px;
     padding-right: 10px;
     text-align: center;
     font-size: xx-large;
+}
+.computer_select_div {
+    flex: 1;
 }
 
 .price_computer {
@@ -154,7 +159,8 @@
         height: fit-content;
     }
     .price_computer {
-        display: inline;
+        display: flex;
+        width: 60%;
     }
 }
 

@@ -20,7 +20,7 @@ from products.models import Product
 @pytest.mark.django_db
 def test_add_review_is_available_for_logged_in_users():
     # GIVEN
-    Product.objects.create(name="Test Product", desc="Test Desc", price=2.00, spice_level=Product.Spice.MILD, image=create_fake_test_image())
+    Product.objects.create(name="Test Product", desc="Test Desc", spice_level=Product.Spice.MILD, image=create_fake_test_image())
     user = User.objects.create_user(username='testuser', password='testpass')
 
     # Login the user
@@ -37,7 +37,7 @@ def test_add_review_is_available_for_logged_in_users():
 @pytest.mark.django_db
 def test_add_review_not_available_for_not_logged_in_users():
     # GIVEN
-    Product.objects.create(name="Test Product", desc="Test Desc", price=2.00, spice_level=Product.Spice.MILD, image=create_fake_test_image())
+    Product.objects.create(name="Test Product", desc="Test Desc", spice_level=Product.Spice.MILD, image=create_fake_test_image())
     
     #WHEN
     client = Client()

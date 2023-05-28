@@ -40,7 +40,24 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    <div class="price_div black_border orange_bg centered price_phone"><span class="currency">€</span>{{ product.price|floatformat:2 }}</div>
+                    
+                    <div class="price_phone">
+                        {% if product.sizes.all|length == 0 %}
+                            Coming soon!
+                        {% else %}
+                        <div class="centered" style="width: fit-content; margin-bottom: 10px;">
+                            <select class="centered" style="font-size: x-large;" name="option_size" onchange="document.getElementById('price_value').textContent = this.options[this.selectedIndex].getAttribute('data-price')">
+                                {% for size in product.sizes.all|dictsortreversed:"size" %}
+                                    <option data-price="{{ size.price }}">{{ size.size }} g</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="price_div black_border orange_bg centered">
+                            <span class="currency">€</span>
+                            <span id="price_value">{{ biggest_size_option.price }}</span>
+                        </div>
+                        {% endif %} 
+                    </div>
                 </div>
             </div>
             <div class="right_product centered">
@@ -49,7 +66,23 @@
                         <p>{{product.desc}}</p>
                     </div>
                     <div class="price_computer centered">
-                        <div class="price_div black_border orange_bg centered"><span class="currency">€</span>{{ product.price|floatformat:2 }}</div>
+                        {% if product.sizes.all|length == 0 %}
+                        <div class="price_div black_border orange_bg centered">
+                            <span>Coming soon!</span>
+                        </div>
+                        {% else %}
+                        <div class="computer_select_div centered" style="width: fit-content;">
+                            <select style="font-size: large;" name="option_computer_size" onchange="document.getElementById('price_computer_value').textContent = this.options[this.selectedIndex].getAttribute('data-price')">
+                                {% for size in product.sizes.all|dictsortreversed:"size" %}
+                                    <option data-price="{{ size.price }}">{{ size.size }} g</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="price_div black_border orange_bg centered">
+                            <span class="currency">€</span>
+                            <span id="price_computer_value">{{ biggest_size_option.price }}</span>
+                        </div>
+                        {% endif %}  
                     </div>
                 </div>
             </div>

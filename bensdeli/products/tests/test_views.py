@@ -8,7 +8,7 @@ import pytest
 def test_calculate_average_review_rating_works():
     # GIVEN
     user = User.objects.create_user(username='testuser', password='testpass')
-    product = Product.objects.create(name="Test Product", desc="Test Desc", price=2.00, spice_level=Product.Spice.MILD)
+    product = Product.objects.create(name="Test Product", desc="Test Desc", spice_level=Product.Spice.MILD)
     Review.objects.create(user=user, rating=2, product=product)
     Review.objects.create(user=user, rating=2, product=product)
     Review.objects.create(user=user, rating=3, product=product)
@@ -25,7 +25,7 @@ def test_calculate_average_review_rating_works():
 @pytest.mark.django_db
 def test_calculate_average_review_handles_no_reviews():
     # GIVEN
-    product = Product.objects.create(name="Test Product", desc="Test Desc", price=2.00, spice_level=Product.Spice.MILD)
+    product = Product.objects.create(name="Test Product", desc="Test Desc", spice_level=Product.Spice.MILD)
 
     #WHEN
     reviews = product.reviews.all()
