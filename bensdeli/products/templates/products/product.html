@@ -48,7 +48,7 @@
                         <div class="centered" style="width: fit-content; margin-bottom: 10px;">
                             <select class="centered" style="font-size: x-large;" name="option_size" onchange="document.getElementById('price_value').textContent = this.options[this.selectedIndex].getAttribute('data-price')">
                                 {% for size in product.sizes.all|dictsortreversed:"size" %}
-                                    <option data-price="{{ size.price }}">{{ size.size }} g</option>
+                                    <option data-price="{{ size.price|floatformat:2  }}">{{ size.size }} g</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -74,7 +74,7 @@
                         <div class="computer_select_div centered" style="width: fit-content;">
                             <select style="font-size: large;" name="option_computer_size" onchange="document.getElementById('price_computer_value').textContent = this.options[this.selectedIndex].getAttribute('data-price')">
                                 {% for size in product.sizes.all|dictsortreversed:"size" %}
-                                    <option data-price="{{ size.price }}">{{ size.size }} g</option>
+                                    <option data-price="{{ size.price|floatformat:2  }}">{{ size.size }} g</option>
                                 {% endfor %}
                             </select>
                         </div>
