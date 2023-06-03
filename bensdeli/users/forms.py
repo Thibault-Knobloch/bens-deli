@@ -18,3 +18,10 @@ class RegisterForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label='Username or Email')
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+
+class UserEditForm(forms.ModelForm):
+    username = forms.CharField(help_text='')
+    class Meta:
+        model = User
+        fields = ["username", "email"]

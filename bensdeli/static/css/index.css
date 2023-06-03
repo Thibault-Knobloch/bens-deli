@@ -33,6 +33,13 @@
     font-weight: bold;
 }
 
+.navbar_profile_icon {
+    width: 3vw;
+    min-width: 40px;
+    margin-right: 15px;
+    margin-top: -8px;
+}
+
 .navigation_text {
     font-size: x-large;
     margin: auto;

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="register_container">
+    <h2 class="centered" style="width: fit-content;">Hi {{user.username}}!</h2>
+    <div class="register_form_div">
+        <form method="post" class="profile_form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="register_button orange_bg black_border" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, UserEditForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.views import LoginView
 
@@ -37,6 +37,8 @@ def user_login_view(request):
             password = form.cleaned_data.get('password')
             user = authenticate(request, username=username, password=password)
             next_url = request.GET.get('next', '/')
+            if next_url == "/register/" or next_url == "/login/":
+                next_url = "/"
             if user is not None:
                 login(request, user)
                 return redirect(next_url)
@@ -46,3 +48,15 @@ def user_login_view(request):
         form = LoginForm()
     return render(request, 'users/login.html', {'form': form})
 
+
+def profile_view(request):
+    user = request.user
+    if request.method == "POST":
+        form = UserEditForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("profile_view")
+    if request.method == "GET":
+        form = UserEditForm(instance=user, initial={'username': user.username, 'email': user.email})
+        return render(request, "users/profile.html", {'form': form})
+    return redirect("index_view")

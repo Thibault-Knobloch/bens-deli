@@ -27,7 +27,7 @@
 <body class="bg_cream">
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light bg_orange" style="border: 5px solid black;">
-      <img class="navbar_logo" src="{% static 'images/logo_fake.png' %}" alt="My Image" onclick="location.assign('/');">
+      <img class="navbar_logo" src="{% static 'images/logo_fake.png' %}" alt="bens deli logo" onclick="location.assign('/');">
       <a class="navbar-brand custom_navbar" href="/"><span class="logo_text">Ben's Deli</span></a>
       
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -38,11 +38,17 @@
           <li class="nav-item navigation_text {% if '/product/' in request.path %}active{% endif %}">
             <a class="nav-link" href="/product/1">Products</a>
           </li>
+          <li class="nav-item navigation_text {% if '/cart/' in request.path %}active{% endif %}">
+            <a class="nav-link" href="/cart/">Shopping Cart</a>
+          </li>
         </ul>
         <ul class="navbar-nav ml-auto" style='order: 2;'>
           {% if user.is_authenticated %}
             <li class="nav-item navigation_text">
               <a class="nav-link" href="{% url 'logout_view' %}?next={{ request.path }}">Logout</a>
+            </li>
+            <li class="nav-item navigation_text">
+              <img class="centered navbar_logo" src="{% static 'images/profile_icon.png' %}" alt="profile icon" onclick="location.assign('/profile');">
             </li>
           {% else %}
             <li class="nav-item navigation_text {% if request.path == '/login/' %}active{% endif %}">
