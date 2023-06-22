@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, LoginForm, UserEditForm
+from .forms import RegisterForm, LoginForm, UserEditForm, CustomPasswordResetForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView
 
 
 # Create your views here.
@@ -60,3 +60,20 @@ def profile_view(request):
         form = UserEditForm(instance=user, initial={'username': user.username, 'email': user.email})
         return render(request, "users/profile.html", {'form': form})
     return redirect("index_view")
+
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'users/password_reset_form.html'
+    form_class = CustomPasswordResetForm
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'password_reset_confirm.html'  # Replace with your desired template name
+
+    def form_valid(self, form):
+        # Perform any custom logic here
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Replace with your desired URL or reverse_lazy reference
+        return reverse_lazy('password_reset_complete')

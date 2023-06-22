@@ -10,6 +10,8 @@
             <input type="hidden" name="next" value="{{ request.GET.next }}">
             <button class="register_button orange_bg black_border" type="submit">Login</button>
         </form>
+        <br>
+        <p style="font-size: large;">Forgot your password? <a href="{% url 'password_reset' %}">Reset Password</a></p>
     </div>
 </div>
 {% endblock %}
